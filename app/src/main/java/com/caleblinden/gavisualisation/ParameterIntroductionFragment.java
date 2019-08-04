@@ -74,27 +74,27 @@ public class ParameterIntroductionFragment extends Fragment {
             case POPULATION_SIZE:
                 setParameters(getResources().getString(R.string.genetic_algorithm_population_size),
                         getResources().getString(R.string.genetic_algorithm_population_size_description));
-                parameterValue.addTextChangedListener(getTextWatcher(gaParameterId));
+                parameterValue.addTextChangedListener(getTextWatcher());
                 break;
             case MUTATION_RATE:
                 setParameters(getResources().getString(R.string.genetic_algorithm_mutation_rate),
                         getResources().getString(R.string.genetic_algorithm_mutation_rate_description));
-                parameterValue.addTextChangedListener(getTextWatcher(gaParameterId));
+                parameterValue.addTextChangedListener(getTextWatcher());
                 break;
             case UNIFORM_RATE:
                 setParameters(getResources().getString(R.string.genetic_algorithm_uniform_rate),
                         getResources().getString(R.string.genetic_algorithm_uniform_rate_description));
-                parameterValue.addTextChangedListener(getTextWatcher(gaParameterId));
+                parameterValue.addTextChangedListener(getTextWatcher());
                 break;
             case TOURNAMENT_SIZE:
                 setParameters(getResources().getString(R.string.genetic_algorithm_tournament_size),
                         getResources().getString(R.string.genetic_algorithm_tournament_size_description));
-                parameterValue.addTextChangedListener(getTextWatcher(gaParameterId));
+                parameterValue.addTextChangedListener(getTextWatcher());
                 break;
             case ELITISM:
                 setParameters(getResources().getString(R.string.genetic_algorithm_elitism),
                         getResources().getString(R.string.genetic_algorithm_elitism_description));
-                parameterValue.addTextChangedListener(getTextWatcher(gaParameterId));
+                parameterValue.addTextChangedListener(getTextWatcher());
                 break;
             case SOLUTION:
                 setParameters(getResources().getString(R.string.solution_title),
@@ -110,23 +110,40 @@ public class ParameterIntroductionFragment extends Fragment {
         }
     }
 
-    private TextWatcher getTextWatcher(final int parameterId) {
+    private TextWatcher getTextWatcher() {
         return new TextWatcher() {
-
-            // the user's changes are saved here
+            // The user's changes are saved here
             public void onTextChanged(CharSequence c, int start, int before, int count) {
-                mListener.saveInputValue(parameterId, Integer.valueOf(c.toString()));
+                if (c == null || c.equals("")) {
+                    return;
+                }
+
+                if (c.toString().contains(".")) {
+                    try {
+                        setDoubleParamter(Double.valueOf(c.toString()));
+                    } catch (Exception e) {}
+                } else {
+                    try {
+                        setIntegerParameter(Integer.valueOf(c.toString()));
+                    } catch (Exception e) {}
+                }
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) {}
 
             public void beforeTextChanged(CharSequence c, int start, int count, int after) {
                 // this space intentionally left blank
             }
         };
+    }
+
+    private void setDoubleParamter(Double parameter) {
+        mListener.saveInputValue(gaParameterId, 0, parameter);
+    }
+
+    private void setIntegerParameter(Integer parameter) {
+        mListener.saveInputValue(gaParameterId, parameter, 0);
     }
 
     private void setParameters(String title, String explanation) {
@@ -164,12 +181,11 @@ public class ParameterIntroductionFragment extends Fragment {
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        if (savedInstanceState != null) {
-        }
+        if (savedInstanceState != null) {}
     }
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction();
-        void saveInputValue(int type, int value);
+        void saveInputValue(int type, int intValue, double doubleValue);
     }
 }

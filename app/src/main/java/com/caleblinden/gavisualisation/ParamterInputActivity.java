@@ -69,23 +69,23 @@ public class ParamterInputActivity extends FragmentActivity implements Parameter
     }
 
     @Override
-    public void saveInputValue(int type, int value) {
+    public void saveInputValue(int type, int value, double doubleValue) {
         GAParameters param = GAParameters.fromValue(type);
         if (param == null) {
             return;
         }
         switch (param) {
             case POPULATION_SIZE:
-                populationSize = 100;
+                populationSize = value;
                 break;
             case MUTATION_RATE:
-                mutationRate = 0.05;
+                mutationRate = doubleValue;
                 break;
             case UNIFORM_RATE:
-                uniformRate = 3;
+                uniformRate = doubleValue;
                 break;
             case TOURNAMENT_SIZE:
-                tournamentSize = 15;
+                tournamentSize = value;
                 break;
             case ELITISM:
                 elitism = false;
