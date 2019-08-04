@@ -49,7 +49,8 @@ public class SplashActivity extends AppCompatActivity {
         boolean seenOnboarding = prefs.getBoolean(SEEN_ONBOARDING, false);
 
         if (seenOnboarding) {
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            startActivity(new Intent(SplashActivity.this, ParamterInputActivity.class));
         } else {
             startActivity(new Intent(SplashActivity.this, ParamterInputActivity.class));
         }

@@ -54,14 +54,14 @@ public class MainActivity extends AppCompatActivity {
         setPrefs();
     }
 
-    public static Intent getStartIntent(Context context, String mutationRate, String uniformRate, String tournamentSize, String solutionText, String populationSize) {
+    public static Intent getStartIntent(Context context, double mutationRate, double uniformRate, int tournamentSize, String solutionText, int populationSize) {
         Intent populationIntent = new Intent(context, MainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(MUTATION_RATE, mutationRate);
         bundle.putSerializable(TOURNAMENT_SIZE, tournamentSize);
         bundle.putSerializable(SOLUTION, solutionText);
         bundle.putSerializable(POPULATION_SIZE, populationSize);
-        bundle.putString(UNIFORM_RATE, uniformRate);
+        bundle.putSerializable(UNIFORM_RATE, uniformRate);
 
         populationIntent.putExtras(bundle);
         return populationIntent;

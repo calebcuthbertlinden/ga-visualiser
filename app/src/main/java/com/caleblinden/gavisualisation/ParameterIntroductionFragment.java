@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.caleblinden.gavisualisation.GeneticAlgorithm.GAParameters;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ParameterIntroductionFragment extends Fragment {
 
-    private static final String GA_PARAMETER_TYPE = "type";
-    private int gaParameterType;
+    private static final String GA_PARAMETER_ID = "type";
+    private int gaParameterId;
 
     private OnFragmentInteractionListener mListener;
 
@@ -35,7 +39,7 @@ public class ParameterIntroductionFragment extends Fragment {
     public static ParameterIntroductionFragment newInstance(int position) {
         ParameterIntroductionFragment fragment = new ParameterIntroductionFragment();
         Bundle args = new Bundle();
-        args.putInt(GA_PARAMETER_TYPE, position);
+        args.putInt(GA_PARAMETER_ID, position);
         fragment.setArguments(args);
         return fragment;
     }
@@ -44,7 +48,7 @@ public class ParameterIntroductionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            gaParameterType = getArguments().getInt(GA_PARAMETER_TYPE);
+            gaParameterId = getArguments().getInt(GA_PARAMETER_ID);
         }
     }
 
@@ -62,33 +66,67 @@ public class ParameterIntroductionFragment extends Fragment {
     }
 
     private void setupView() {
-        switch (gaParameterType) {
-            case 0:
+        GAParameters param = GAParameters.fromValue(gaParameterId);
+        if (param == null) {
+            return;
+        }
+        switch (param) {
+            case POPULATION_SIZE:
                 setParameters(getResources().getString(R.string.genetic_algorithm_population_size),
                         getResources().getString(R.string.genetic_algorithm_population_size_description));
+                parameterValue.addTextChangedListener(getTextWatcher(gaParameterId));
                 break;
-            case 1:
+            case MUTATION_RATE:
                 setParameters(getResources().getString(R.string.genetic_algorithm_mutation_rate),
                         getResources().getString(R.string.genetic_algorithm_mutation_rate_description));
+                parameterValue.addTextChangedListener(getTextWatcher(gaParameterId));
                 break;
-            case 2:
+            case UNIFORM_RATE:
                 setParameters(getResources().getString(R.string.genetic_algorithm_uniform_rate),
                         getResources().getString(R.string.genetic_algorithm_uniform_rate_description));
+                parameterValue.addTextChangedListener(getTextWatcher(gaParameterId));
                 break;
-            case 3:
+            case TOURNAMENT_SIZE:
                 setParameters(getResources().getString(R.string.genetic_algorithm_tournament_size),
                         getResources().getString(R.string.genetic_algorithm_tournament_size_description));
+                parameterValue.addTextChangedListener(getTextWatcher(gaParameterId));
                 break;
-            case 4:
+            case ELITISM:
                 setParameters(getResources().getString(R.string.genetic_algorithm_elitism),
                         getResources().getString(R.string.genetic_algorithm_elitism_description));
+                parameterValue.addTextChangedListener(getTextWatcher(gaParameterId));
                 break;
-            case 5:
+            case SOLUTION:
                 setParameters(getResources().getString(R.string.solution_title),
                         getResources().getString(R.string.genetic_algorithm_population_size_description));
                 btnProceed.setVisibility(View.VISIBLE);
+                btnProceed.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mListener.onFragmentInteraction();
+                    }
+                });
                 break;
         }
+    }
+
+    private TextWatcher getTextWatcher(final int parameterId) {
+        return new TextWatcher() {
+
+            // the user's changes are saved here
+            public void onTextChanged(CharSequence c, int start, int before, int count) {
+                mListener.saveInputValue(parameterId, Integer.valueOf(c.toString()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            public void beforeTextChanged(CharSequence c, int start, int count, int after) {
+                // this space intentionally left blank
+            }
+        };
     }
 
     private void setParameters(String title, String explanation) {
@@ -116,12 +154,9 @@ public class ParameterIntroductionFragment extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        // Get user input email from the edit text box.
+        // Get user input and save it to the instance
         String inputValue = parameterValue.getText().toString();
-
         if (outState != null) {
-            // Save user email instance variable value in bundle.
             outState.putString(INPUT_EXTRA, inputValue);
         }
     }
@@ -130,11 +165,11 @@ public class ParameterIntroductionFragment extends Fragment {
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if (savedInstanceState != null) {
-            // Retrieve the user email value from bundle.
         }
     }
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction();
+        void saveInputValue(int type, int value);
     }
 }
