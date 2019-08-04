@@ -51,17 +51,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setPrefs();
+        setupScreen();
     }
 
-    public static Intent getStartIntent(Context context, String mutationRate, String uniformRate, String tournamentSize, String solutionText, String populationSize) {
+    public static Intent getStartIntent(Context context, double mutationRate, double uniformRate, int tournamentSize, String solutionText, int populationSize) {
         Intent populationIntent = new Intent(context, MainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(MUTATION_RATE, mutationRate);
         bundle.putSerializable(TOURNAMENT_SIZE, tournamentSize);
         bundle.putSerializable(SOLUTION, solutionText);
         bundle.putSerializable(POPULATION_SIZE, populationSize);
-        bundle.putString(UNIFORM_RATE, uniformRate);
+        bundle.putSerializable(UNIFORM_RATE, uniformRate);
 
         populationIntent.putExtras(bundle);
         return populationIntent;
@@ -110,6 +110,14 @@ public class MainActivity extends AppCompatActivity {
         GeneticAlgorithm.setupParameters(Double.parseDouble(uniformRate.getText().toString()), Double.parseDouble(mutationRate.getText().toString()), Integer.parseInt(tournamentSize.getText().toString()));
         myPop = new Population(Integer.parseInt(populationSize.getText().toString()), true);
         populations = new ArrayList<>();
+    }
+
+    private void setupScreen() {
+        uniformRate.setText(getIntent().getSerializableExtra(UNIFORM_RATE).toString());
+        mutationRate.setText(getIntent().getSerializableExtra(MUTATION_RATE).toString());
+        tournamentSize.setText(getIntent().getSerializableExtra(TOURNAMENT_SIZE).toString());
+        populationSize.setText(getIntent().getSerializableExtra(POPULATION_SIZE).toString());
+        setPrefs();
     }
 
     private void setPrefs() {
