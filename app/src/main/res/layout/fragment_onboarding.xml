@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.caleblinden.techaccelerator.gavisualisation.ParameterIntroductionFragment"
+    android:background="@color/colorCard"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/parameter_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/default_fragment_title"
+        android:layout_marginTop="@dimen/gutterSpaceDouble"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textColor="@color/colorLabelText"/>
+
+    <TextView
+        android:id="@+id/parameter_explanation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/default_fragment_explanation"
+        android:layout_margin="@dimen/gutterSpaceDouble"
+        android:textAlignment="center"
+        android:textColor="@color/colorLabelText"
+        android:layout_below="@+id/parameter_type"/>
+
+    <LinearLayout
+        android:id="@+id/parameter_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/gutterSpaceHalf"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/gutterSpaceDouble"
+        android:layout_below="@+id/parameter_explanation">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/lblParameterInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/parameter_input"
+                style="@style/InputText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/default_fragment_input" />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/btn_proceed"
+        android:layout_marginBottom="@dimen/gutterSpaceDouble"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/btn_proceed"
+        android:theme="@style/CustomButton"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

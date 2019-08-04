@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/generation_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorInfoCard">
+
+    <TextView
+        android:id="@+id/individual_generation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/genetic_algorithm_uniform_rate"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#000000"
+        android:layout_margin="8dp"/>
+
+    <TextView
+        android:id="@+id/individual_fitness_worst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/genetic_algorithm_uniform_rate"
+        android:layout_margin="8dp"/>
+
+    <TextView
+        android:id="@+id/individual_genes_worst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/genetic_algorithm_uniform_rate"
+        android:layout_margin="8dp"/>
+
+
+    <TextView
+        android:id="@+id/individual_fitness_best"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/genetic_algorithm_uniform_rate"
+        android:layout_margin="8dp"/>
+
+    <TextView
+        android:id="@+id/individual_genes_best"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/genetic_algorithm_uniform_rate"
+        android:layout_margin="8dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#50000000"/>
+
+</LinearLayout>
