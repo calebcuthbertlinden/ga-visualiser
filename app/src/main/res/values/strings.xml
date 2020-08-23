@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">Genetic Algorithm</string>
+    <string name="ga_title">Genetic Algorithm</string>
+
+    <string name="disclaimer">Developed by Caleb Linden \n March 2018 \n Tech Accelerator</string>
+    <string name="how_does_it_work">How do Genetic Algorithms work?</string>
+    <string name="generation_label">"Generation: "</string>
+    <string name="fitness_label">" Fittest: "</string>
+    <string name="visualise_btn">"VISUALISE"</string>
+    <string name="btn_proceed">Proceed</string>
+
+
+    <!--GA Parameter labels-->
+    <string name="genetic_algorithm_mutation_rate">Mutation Rate</string>
+    <string name="genetic_algorithm_uniform_rate">Uniform Rate</string>
+    <string name="genetic_algorithm_tournament_size">Tournament size</string>
+    <string name="genetic_algorithm_population_size">Population size</string>
+    <string name="genetic_algorithm_chromosome_amount">Chromosome amount</string>
+    <string name="genetic_algorithm_elitism">Elitism</string>
+
+    <!--GA Parameter default values-->
+    <string name="genetic_algorithm_mutation_rate_default">0.015</string>
+    <string name="genetic_algorithm_uniform_rate_default">0.5</string>
+    <string name="genetic_algorithm_tournament_size_default">5</string>
+    <string name="genetic_algorithm_population_size_default">50</string>
+    <string name="genetic_algorithm_chromosome_amount_default">50</string>
+
+    <!--GA Parameter descriptions-->
+    <string name="genetic_algorithm_mutation_rate_description">In certain new offspring formed, some of their genes can be subjected to a mutation with a low random probability. This implies that some of the bits in the bit string can be flipped. Mutation occurs to maintain diversity within the population and prevent premature convergence.</string>
+    <string name="genetic_algorithm_uniform_rate_description">The uniform crossover uses a fixed mixing ratio between two parents. Unlike single- and two-point crossover, the uniform crossover enables the parent chromosomes to contribute the gene level rather than the segment level.If the mixing ratio is 0.5, the offspring has approximately half of the genes from first parent and the other half from second parent, although cross over points can be randomly chosen.</string>
+    <string name="genetic_algorithm_tournament_size_description">Tournament selection involves running several "tournaments" among a few individuals (or "chromosomes") chosen at random from the population. The winner of each tournament (the one with the best fitness) is selected for crossover. Selection pressure[clarification needed] is easily adjusted by changing the tournament size[why?]. If the tournament size is larger, weak individuals have a smaller chance to be selected because if a weak individual is selected to be in a tournament, there is a higher probability that a stronger individual is also in that tournament.</string>
+    <string name="genetic_algorithm_population_size_description">The process begins with a set of individuals which is called a Population. Each individual is a solution to the problem you want to solve.An individual is characterized by a set of parameters (variables) known as Genes. Genes are joined into a string to form a Chromosome (solution).In a genetic algorithm, the set of genes of an individual is represented using a string, in terms of an alphabet. Usually, binary values are used (string of 1s and 0s). We say that we encode the genes in a chromosome.</string>
+    <string name="genetic_algorithm_elitism_description">Elitism involves copying a small proportion of the fittest candidates, unchanged, into the next generation. This can sometimes have a dramatic impact on performance by ensuring that the EA does not waste time re-discovering previously discarded partial solutions. Candidate solutions that are preserved unchanged through elitism remain eligible for selection as parents when breeding the remainder of the next generation.</string>
+
+    <!--Buttons-->
+    <string name="genetic_algorithm_initiate">Initiate</string>
+    <string name="genetic_algorithm_force_stop">Force Stop</string>
+
+    <!--Solution labels-->
+    <string name="solution_title">Solution</string>
+    <string name="solution_found">Solution Found!</string>
+    <string name="solution_suggested">1001001001001000001010100111110001001000100100100101010100</string>
+
+    <!--Parameter input fragment-->
+    <string name="default_fragment_title">Parameter title</string>
+    <string name="default_fragment_explanation">Parameter explanation</string>
+    <string name="default_fragment_input">Parameter input</string>
+
+</resources>
